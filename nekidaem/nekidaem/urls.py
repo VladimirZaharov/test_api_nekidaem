@@ -17,11 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from nekidaem.user.views import FeedsModelViewSet
+from user.views import FeedsModelViewSet
 
 router = DefaultRouter()
 
-router.register('<int:pk>/feeds', FeedsModelViewSet)
+router.register('feeds', FeedsModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

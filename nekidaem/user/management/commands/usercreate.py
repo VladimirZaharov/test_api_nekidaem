@@ -1,13 +1,17 @@
 from django.core.management.base import BaseCommand
-from mixer.main import Mixer
+from faker import Faker
 
+from user.models import User
 
-mixer = Mixer()
+from blog.models import Blog
 
+fake = Faker()
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
         users = User.objects.all()
+        blog = Blog.objects.all()
+        blog.delete()
         users.delete()
         users_number = int(input(': '))
         for i in range(users_number):
@@ -18,6 +22,8 @@ class Command(BaseCommand):
                 email=fake.email()
             )
             user.save()
+            blog = Blog.objects.create(user=user)
+            blog.save()
         superuser = User.objects.create(
             username='root',
             first_name=fake.first_name(),
@@ -25,5 +31,5 @@ class Command(BaseCommand):
             email=fake.email()
         )
         superuser.is_superuser = True
-        superuser.password = '2612'
+        superuser.password = 'root'
         superuser.save()
