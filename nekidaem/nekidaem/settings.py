@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import environ
+import djcelery
+djcelery.setup_loader()
 env = environ.Env()
 environ.Env.read_env()
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "djcelery",
 
     'user',
     'blog',
@@ -132,6 +135,10 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 AUTH_USER_MODEL = 'user.User'
 
 EMAIL_HOST = 'smtp.mailtrap.io'
@@ -143,3 +150,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"

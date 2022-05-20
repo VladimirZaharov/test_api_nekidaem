@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
         users = Post.objects.all()
         users.delete()
-        posts_number = int(input(': '))
+        posts_number = int(input('Введите максимальное число постов у пользователя: '))
         for blog in blogs:
             for i in range(random.randint(1, posts_number)):
                 post = Post.objects.create(

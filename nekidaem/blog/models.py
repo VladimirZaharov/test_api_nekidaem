@@ -8,5 +8,5 @@ class Blog(models.Model):
 
 
 class UserSubscription(models.Model):
-    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     subscriptions = models.ForeignKey(Blog, on_delete=models.CASCADE)

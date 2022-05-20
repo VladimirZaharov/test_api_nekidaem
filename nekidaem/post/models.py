@@ -16,5 +16,5 @@ class Post(models.Model):
 
 
 class UserWatchedPosts(models.Model):
-    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     watched_posts = models.ForeignKey(Post, on_delete=models.CASCADE)
